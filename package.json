@@ -1,5 +1,5 @@
 {
-  "name": "game",
+  "name": "rolling-bar",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,14 @@
   },
   "dependencies": {
     "@next/font": "13.1.1",
+    "@react-three/drei": "^9.51.3",
+    "@react-three/fiber": "^8.10.0",
+    "@react-three/rapier": "^0.12.2",
+    "leva": "^0.9.34",
     "next": "13.1.1",
+    "r3f-perf": "^6.6.3",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "three": "^0.148.0"
   }
 }
