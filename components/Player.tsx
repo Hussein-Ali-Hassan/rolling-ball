@@ -1,4 +1,4 @@
-import { RigidBody, useRapier } from "@react-three/rapier";
+import { RigidBody, RigidBodyApi, useRapier } from "@react-three/rapier";
 import { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useKeyboardControls } from "@react-three/drei";
@@ -8,25 +8,26 @@ const smoothedCameraPostion = new THREE.Vector3(10, 10, 10);
 const smoothedCameraTarget = new THREE.Vector3();
 
 export default function Player() {
-  const body = useRef();
+  const body = useRef<RigidBodyApi>(null);
 
   const [subscribeKeys, getKeys] = useKeyboardControls();
   const { rapier, world } = useRapier();
   const rapierWorld = world.raw();
 
   function jump() {
-    const origin = body.current.translation();
+    const origin = body?.current?.translation();
     origin.y -= 0.31;
 
     const direction = { x: 0, y: -1, z: 0 };
     const ray = new rapier.Ray(origin, direction);
     const hit = rapierWorld.castRay(ray, 10, true);
 
-    if (hit.toi < 0.15) body.current.applyImpulse({ x: 0, y: 0.5, z: 0 });
+    if (hit?.toi < 0.15) body?.current?.applyImpulse({ x: 0, y: 0.5, z: 0 });
   }
 
   useEffect(() => {
     const unSub = subscribeKeys(
+      // @ts-ignore
       (state) => state.jump,
       (value) => {
         if (value) jump();
@@ -36,7 +37,7 @@ export default function Player() {
     return unSub;
   }, []);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     const { forward, backward, leftward, rightward } = getKeys();
 
     const impulse = { x: 0, y: 0, z: 0 };
@@ -99,7 +100,7 @@ export default function Player() {
       linearDamping={0.5}
       angularDamping={0.5}
     >
-      <mesh castShadows>
+      <mesh castShadow>
         <icosahedronGeometry args={[0.3, 1]} />
         <meshStandardMaterial flatShading color="mediumpurple" />
       </mesh>

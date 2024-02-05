@@ -1,10 +1,6 @@
-import * as THREE from "three";
 import { RigidBody } from "@react-three/rapier";
 import { useGLTF } from "@react-three/drei";
-
-const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-const floor1Material = new THREE.MeshStandardMaterial({ color: "limegreen" });
-THREE.ColorManagement.legacyMode = false;
+import Ground from "./Ground";
 
 export default function EndBlock({ position }) {
   const hamburger = useGLTF("./hamburger.glb");
@@ -13,15 +9,10 @@ export default function EndBlock({ position }) {
 
   return (
     <group position={position}>
-      <mesh
-        receiveShadow
-        position={[0, 0, 0]}
-        scale={[4, 0.2, 4]}
-        geometry={boxGeometry}
-        material={floor1Material}
-      />
+      <Ground color="#111111" position={[0, 0, 0]} />
       <RigidBody
         type="fixed"
+        // this collider: "hull" is used to detect the collision with the ball by taking the shape of the mesh instead of the box
         colliders="hull"
         position={[0, 0.25, 0.1]}
         restitution={0.2}

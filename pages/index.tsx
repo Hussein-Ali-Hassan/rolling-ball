@@ -1,7 +1,6 @@
-import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Perf } from "r3f-perf";
-import { Physics, Debug } from "@react-three/rapier";
+import { Physics } from "@react-three/rapier";
 import { KeyboardControls } from "@react-three/drei";
 
 import Lights from "../components/Lights";
@@ -28,10 +27,9 @@ export default function Home() {
       >
         <Perf position="top-left" />
 
-        <OrbitControls makeDefault />
+        <color args={["#252731"]} attach="background" />
 
         <Physics>
-          <Debug />
           <Lights />
           <Level />
         </Physics>
