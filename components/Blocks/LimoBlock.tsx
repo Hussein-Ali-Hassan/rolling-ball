@@ -5,8 +5,11 @@ import { RigidBody, RigidBodyApi } from "@react-three/rapier";
 import Ground from "./Ground";
 
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-const obstacleMaterial = new THREE.MeshStandardMaterial({ color: "orangered" });
-// @ts-ignore
+const obstacleMaterial = new THREE.MeshStandardMaterial({
+  color: "#ff0000",
+  metalness: 0,
+  roughness: 1,
+});
 THREE.ColorManagement.legacyMode = false;
 
 export default function LimboBlock({ position }) {

@@ -9,7 +9,11 @@ export default function Ground({
   color: string;
   position: [number, number, number];
 }) {
-  const floor1Material = new THREE.MeshStandardMaterial({ color });
+  const floor1Material = new THREE.MeshStandardMaterial({
+    color,
+    metalness: 0,
+    roughness: 0,
+  });
 
   return (
     <mesh

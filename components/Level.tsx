@@ -8,16 +8,19 @@ import {
 import { useMemo } from "react";
 import Walls from "./Walls";
 import Player from "./Player";
+import useGame from "../hooks/useGame";
 
 export default function Level({
-  trapsCount = 5,
   trapsType = [SpinnerBlock, LimoBlock, AxeBlock],
 }) {
+  const trapsCount = useGame((state) => state.blocksCount);
+  const blocksSeed = useGame((state) => state.blocksSeed);
+
   const blocks = useMemo(() => {
     return Array(trapsCount)
       .fill(1)
       .map(() => trapsType[Math.floor(Math.random() * trapsType.length)]);
-  }, [trapsCount, trapsType]);
+  }, [trapsCount, trapsType, blocksSeed]);
 
   return (
     <>

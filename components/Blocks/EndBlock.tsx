@@ -1,5 +1,5 @@
 import { RigidBody } from "@react-three/rapier";
-import { useGLTF } from "@react-three/drei";
+import { useGLTF, Text } from "@react-three/drei";
 import Ground from "./Ground";
 
 export default function EndBlock({ position }) {
@@ -9,6 +9,11 @@ export default function EndBlock({ position }) {
 
   return (
     <group position={position}>
+      <Text font="./BebasNeue-Regular.ttf" scale={0.4} position={[0, 1.75, 2]}>
+        FINISH
+        <meshBasicMaterial toneMapped={false} />
+      </Text>
+
       <Ground color="#111111" position={[0, 0, 0]} />
       <RigidBody
         type="fixed"

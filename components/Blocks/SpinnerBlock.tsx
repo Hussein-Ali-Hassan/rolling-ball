@@ -6,7 +6,6 @@ import Ground from "./Ground";
 
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 const obstacleMaterial = new THREE.MeshStandardMaterial({ color: "orangered" });
-// @ts-ignore
 THREE.ColorManagement.legacyMode = false;
 
 export default function SpinnerBlock({ position }) {

@@ -5,6 +5,7 @@ import { KeyboardControls } from "@react-three/drei";
 
 import Lights from "../components/Lights";
 import Level from "../components/Level";
+import Interface from "../components/Interface";
 
 export default function Home() {
   return (
@@ -25,7 +26,7 @@ export default function Home() {
           position: [0, 2, 10],
         }}
       >
-        <Perf position="top-left" />
+        <Perf position="bottom-left" />
 
         <color args={["#252731"]} attach="background" />
 
@@ -34,6 +35,8 @@ export default function Home() {
           <Level />
         </Physics>
       </Canvas>
+
+      <Interface />
     </KeyboardControls>
   );
 }
