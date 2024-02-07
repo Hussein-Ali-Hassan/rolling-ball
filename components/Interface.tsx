@@ -4,7 +4,7 @@ import { useRef, useEffect } from "react";
 import { addEffect } from "@react-three/fiber";
 
 export default function Interface() {
-  const time = useRef();
+  const time = useRef<HTMLDivElement>();
   const restart = useGame((state) => state.restart);
   const phase = useGame((state) => state.phase);
 
@@ -26,8 +26,8 @@ export default function Interface() {
       else if (state.phase === "ended")
         elapsedTime = state.endTime - state.startTime;
       elapsedTime /= 1000;
-      elapsedTime = elapsedTime.toFixed(2);
-      if (time.current) time.current.textContent = elapsedTime;
+      elapsedTime = Number(elapsedTime.toFixed(2));
+      if (time.current) time.current.textContent = String(elapsedTime);
     });
 
     return () => {

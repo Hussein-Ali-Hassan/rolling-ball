@@ -62,6 +62,7 @@ export default function Player() {
     );
 
     const unsubscribeJump = subscribeKeys(
+      // @ts-ignore
       (state) => state.jump,
       (value) => {
         if (value) jump();

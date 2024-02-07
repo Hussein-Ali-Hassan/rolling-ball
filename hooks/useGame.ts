@@ -1,52 +1,64 @@
 import { create } from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 
-export default create(
-  subscribeWithSelector((set) => {
-    return {
-      blocksCount: 8,
-      blocksSeed: 0,
+interface IGame {
+  blocksCount: number;
+  blocksSeed: number;
+  setBlocksCount: (count: number) => void;
 
-      setBlocksCount: (count) => set({ blocksCount: count }),
+  startTime: number;
+  endTime: number;
 
-      /**
-       * Time
-       */
-      startTime: 0,
-      endTime: 0,
+  phase: "ready" | "playing" | "ended";
+  start: () => void;
+  restart: () => void;
+  end: () => void;
+}
 
-      /**
-       * Phases
-       */
-      phase: "ready",
-      start: () => {
-        set((state) => {
-          if (state.phase === "ready")
-            return { phase: "playing", startTime: Date.now() };
-          return {};
-        });
-      },
-      restart: () => {
-        set((state) => {
-          if (state.phase === "playing" || state.phase === "ended")
-            return {
-              phase: "ready",
-              blocksSeed: Math.random(),
-              // blocksCount: Math.floor(Math.random() * 10),
-            };
+export default create<IGame>()(
+  subscribeWithSelector((set) => ({
+    blocksCount: 8,
+    blocksSeed: 0,
 
-          return {};
-        });
-      },
+    setBlocksCount: (count) => set({ blocksCount: count }),
 
-      end: () => {
-        set((state) => {
-          if (state.phase === "playing")
-            return { phase: "ended", endTime: Date.now() };
+    /**
+     * Time
+     */
+    startTime: 0,
+    endTime: 0,
 
-          return {};
-        });
-      },
-    };
-  })
+    /**
+     * Phases
+     */
+    phase: "ready",
+    start: () => {
+      set((state) => {
+        if (state.phase === "ready")
+          return { phase: "playing", startTime: Date.now() };
+        return {};
+      });
+    },
+    restart: () => {
+      set((state) => {
+        if (state.phase === "playing" || state.phase === "ended")
+          return {
+            phase: "ready",
+            blocksSeed: Math.random(),
+            // blocksCount: Math.floor(Math.random() * 10),
+          };
+
+        return {};
+      });
+    },
+
+    end: () => {
+      set((state) => {
+        if (state.phase === "playing")
+          return { phase: "ended", endTime: Date.now() };
+
+        return {};
+      });
+    },
+  }))
 );

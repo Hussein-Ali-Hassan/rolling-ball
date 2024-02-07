@@ -3,6 +3,7 @@ import { RigidBody, CuboidCollider } from "@react-three/rapier";
 
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
 const wallMaterial = new THREE.MeshStandardMaterial({ color: "#887777" });
+// @ts-ignore
 THREE.ColorManagement.legacyMode = false;
 
 export default function Walls({ length }) {

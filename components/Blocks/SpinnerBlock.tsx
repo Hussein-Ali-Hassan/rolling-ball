@@ -5,7 +5,12 @@ import { RigidBody, RigidBodyApi } from "@react-three/rapier";
 import Ground from "./Ground";
 
 const boxGeometry = new THREE.BoxGeometry(1, 1, 1);
-const obstacleMaterial = new THREE.MeshStandardMaterial({ color: "orangered" });
+const obstacleMaterial = new THREE.MeshStandardMaterial({
+  color: "#ff0000",
+  metalness: 0,
+  roughness: 1,
+});
+// @ts-ignore
 THREE.ColorManagement.legacyMode = false;
 
 export default function SpinnerBlock({ position }) {
@@ -28,7 +33,7 @@ export default function SpinnerBlock({ position }) {
 
   return (
     <group position={position}>
-      <Ground color="greenyellow" position={[0, -0.1, 0]} />
+      <Ground color="#222222" position={[0, -0.1, 0]} />
 
       <RigidBody
         ref={obstacleRef}

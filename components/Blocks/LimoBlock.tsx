@@ -10,6 +10,7 @@ const obstacleMaterial = new THREE.MeshStandardMaterial({
   metalness: 0,
   roughness: 1,
 });
+// @ts-ignore
 THREE.ColorManagement.legacyMode = false;
 
 export default function LimboBlock({ position }) {

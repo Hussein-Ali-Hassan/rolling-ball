@@ -10,7 +10,7 @@ import Walls from "./Walls";
 import Player from "./Player";
 import useGame from "../hooks/useGame";
 
-export default function Level({
+export default function Experience({
   trapsType = [SpinnerBlock, LimoBlock, AxeBlock],
 }) {
   const trapsCount = useGame((state) => state.blocksCount);
@@ -25,11 +25,15 @@ export default function Level({
   return (
     <>
       <Player />
+
       <StartBlock position={[0, 0, 0]} />
+
       {blocks.map((Block, index) => (
         <Block key={index} position={[0, 0, -(index + 1) * 4]} />
       ))}
+
       <EndBlock position={[0, 0, -(trapsCount + 1) * 4]} />
+
       <Walls length={trapsCount + 2} />
     </>
   );

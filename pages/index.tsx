@@ -4,7 +4,7 @@ import { Physics } from "@react-three/rapier";
 import { KeyboardControls } from "@react-three/drei";
 
 import Lights from "../components/Lights";
-import Level from "../components/Level";
+import Experience from "../components/Experience";
 import Interface from "../components/Interface";
 
 export default function Home() {
@@ -32,7 +32,7 @@ export default function Home() {
 
         <Physics>
           <Lights />
-          <Level />
+          <Experience />
         </Physics>
       </Canvas>
 
