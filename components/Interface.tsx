@@ -1,21 +1,19 @@
-import { useKeyboardControls } from "@react-three/drei";
 import useGame from "../hooks/useGame";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { addEffect } from "@react-three/fiber";
+import { useWindowSize } from "../hooks/useWindowSize";
 
 export default function Interface() {
   const time = useRef<HTMLDivElement>();
+
+  const [showInterface, setShowInterface] = useState(true);
+
+  const { width } = useWindowSize();
+
   const restart = useGame((state) => state.restart);
   const phase = useGame((state) => state.phase);
 
-  //   const controls = useKeyboardControls((state) => state)
-  const forward = useKeyboardControls((state) => state.forward);
-  const backward = useKeyboardControls((state) => state.backward);
-  const leftward = useKeyboardControls((state) => state.leftward);
-  const rightward = useKeyboardControls((state) => state.rightward);
-  const jump = useKeyboardControls((state) => state.jump);
-
-  //   console.log(forward, backward, leftward, rightward, jump)
+  // Timer
   useEffect(() => {
     const unsubscribeEffect = addEffect(() => {
       const state = useGame.getState();
@@ -34,6 +32,18 @@ export default function Interface() {
       unsubscribeEffect();
     };
   }, []);
+
+  // Hide interface after 6 seconds
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowInterface(false);
+    }, 4000);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
   return (
     <div className="interface">
       {/* Time */}
@@ -47,19 +57,21 @@ export default function Interface() {
         </div>
       )}
       {/* Controls */}
-      <div className="controls">
-        <div className="raw">
-          <div className={`key ${forward ? "active" : ""}`}></div>
+      {showInterface && width > 600 && (
+        <div className="controls">
+          <div className="raw">
+            <div className={`key`}></div>
+          </div>
+          <div className="raw">
+            <div className={`key`}></div>
+            <div className={`key`}></div>
+            <div className={`key`}></div>
+          </div>
+          <div className="raw">
+            <div className={`key large`}></div>
+          </div>
         </div>
-        <div className="raw">
-          <div className={`key ${leftward ? "active" : ""}`}></div>
-          <div className={`key ${backward ? "active" : ""}`}></div>
-          <div className={`key ${rightward ? "active" : ""}`}></div>
-        </div>
-        <div className="raw">
-          <div className={`key large ${jump ? "active" : ""}`}></div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }
