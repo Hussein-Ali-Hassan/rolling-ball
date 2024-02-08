@@ -6,17 +6,6 @@ interface IGame {
   blocksSeed: number;
   setBlocksCount: (count: number) => void;
 
-  forward: boolean;
-  backward: boolean;
-  leftward: boolean;
-  rightward: boolean;
-  jump: boolean;
-  setForward: (forward: boolean) => void;
-  setBackward: (backward: boolean) => void;
-  setLeftward: (leftward: boolean) => void;
-  setRightward: (rightward: boolean) => void;
-  setJump: (jump: boolean) => void;
-
   startTime: number;
   endTime: number;
 
@@ -30,17 +19,6 @@ export default create<IGame>()(
   subscribeWithSelector((set) => ({
     blocksCount: 8,
     blocksSeed: 0,
-
-    forward: false,
-    backward: false,
-    leftward: false,
-    rightward: false,
-    jump: false,
-    setForward: (forward) => set({ forward }),
-    setBackward: (backward) => set({ backward }),
-    setLeftward: (leftward) => set({ leftward }),
-    setRightward: (rightward) => set({ rightward }),
-    setJump: (jump) => set({ jump }),
 
     setBlocksCount: (count) => set({ blocksCount: count }),
 
