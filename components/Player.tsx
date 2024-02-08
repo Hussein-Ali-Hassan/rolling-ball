@@ -1,18 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { RigidBody, RigidBodyApi, useRapier } from "@react-three/rapier";
-import { useKeyboardControls } from "@react-three/drei";
 import * as THREE from "three";
 import useGame from "../hooks/useGame";
-import { KeyboardControlsEnum } from "../pages";
 
 export default function Player() {
-  const [subscribeKeys, getKeys] = useKeyboardControls<KeyboardControlsEnum>();
-
-  const jumpPressed = useKeyboardControls<KeyboardControlsEnum>(
-    (state) => state.jump
-  );
-
   const body = useRef<RigidBodyApi>();
 
   const { rapier, world } = useRapier();
@@ -29,8 +21,14 @@ export default function Player() {
   const restart = useGame((state) => state.restart);
   const blocksCount = useGame((state) => state.blocksCount);
 
+  const forward = useGame((state) => state.forward);
+  const backward = useGame((state) => state.backward);
+  const leftward = useGame((state) => state.leftward);
+  const rightward = useGame((state) => state.rightward);
+  const jump = useGame((state) => state.jump);
+
   // Function to jump
-  const jump = () => {
+  const jumpFunc = () => {
     const origin = body.current.translation();
     origin.y -= 0.31;
     const direction = { x: 0, y: -1, z: 0 };
@@ -57,19 +55,12 @@ export default function Player() {
       }
     );
 
-    const unsubscribeAny = subscribeKeys(() => {
-      start();
-    });
-
     return () => {
       unsubscribeReset();
-      unsubscribeAny();
     };
-  }, [subscribeKeys, jump, reset]);
+  }, [reset]);
 
   useFrame((state, delta) => {
-    const { forward, backward, leftward, rightward } = getKeys();
-
     const impulse = { x: 0, y: 0, z: 0 };
     const torque = { x: 0, y: 0, z: 0 };
 
@@ -132,7 +123,9 @@ export default function Player() {
     state.camera.lookAt(smoothedCameraTarget);
   });
 
-  if (jumpPressed) jump();
+  if (jump) jumpFunc();
+
+  if (forward || backward || leftward || rightward || jump) start();
 
   return (
     <>
