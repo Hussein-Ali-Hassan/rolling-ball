@@ -103,6 +103,9 @@ export default function Interface() {
             className={`key ${forward ? "active" : ""}`}
             onMouseDown={() => setForward(true)}
             onMouseUp={() => setForward(false)}
+            onTouchStart={() => setForward(true)}
+            onTouchEnd={() => setForward(false)}
+            onTouchCancel={() => setForward(false)}
           ></div>
         </div>
         <div className="raw">
@@ -110,16 +113,25 @@ export default function Interface() {
             className={`key ${leftward ? "active" : ""}`}
             onMouseDown={() => setLeftward(true)}
             onMouseUp={() => setLeftward(false)}
+            onTouchStart={() => setLeftward(true)}
+            onTouchEnd={() => setLeftward(false)}
+            onTouchCancel={() => setLeftward(false)}
           ></div>
           <div
             className={`key ${backward ? "active" : ""}`}
             onMouseDown={() => setBackward(true)}
             onMouseUp={() => setBackward(false)}
+            onTouchStart={() => setBackward(true)}
+            onTouchEnd={() => setBackward(false)}
+            onTouchCancel={() => setBackward(false)}
           ></div>
           <div
             className={`key ${rightward ? "active" : ""}`}
             onMouseDown={() => setRightward(true)}
             onMouseUp={() => setRightward(false)}
+            onTouchStart={() => setRightward(true)}
+            onTouchEnd={() => setRightward(false)}
+            onTouchCancel={() => setRightward(false)}
           ></div>
         </div>
         <div className="raw">
@@ -127,6 +139,9 @@ export default function Interface() {
             className={`key large ${jump ? "active" : ""}`}
             onMouseDown={() => setJump(true)}
             onMouseUp={() => setJump(false)}
+            onTouchStart={() => setJump(true)}
+            onTouchEnd={() => setJump(false)}
+            onTouchCancel={() => setJump(false)}
           ></div>
         </div>
       </div>
