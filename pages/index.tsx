@@ -1,10 +1,10 @@
 import { Canvas } from "@react-three/fiber";
-import { Perf } from "r3f-perf";
 import { Physics } from "@react-three/rapier";
 
 import Lights from "../components/Lights";
 import Experience from "../components/Experience";
 import Interface from "../components/Interface";
+import PerformanceMenu from "../components/PerformanceMenu";
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
           position: [0, 2, 10],
         }}
       >
-        <Perf position="bottom-left" />
+        <PerformanceMenu />
 
         <color args={["#252731"]} attach="background" />
 
