@@ -17,7 +17,8 @@ interface IGame {
 
 export default create<IGame>()(
   subscribeWithSelector((set) => ({
-    blocksCount: 8,
+    // generate random nb of blocks between 4 and 12
+    blocksCount: Math.floor(Math.random() * 12) + 4,
     blocksSeed: 0,
 
     setBlocksCount: (count) => set({ blocksCount: count }),
